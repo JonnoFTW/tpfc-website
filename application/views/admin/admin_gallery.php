@@ -1,4 +1,4 @@
-<div class="grid_9">
+<div class="col-md-9">
 <div class="box">
 <?
 echo heading("Managing Gallery:{$gtitle['title']}",2);

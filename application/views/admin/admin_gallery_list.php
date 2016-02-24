@@ -1,4 +1,4 @@
-<div class="grid_9">
+<div class="col-md-9">
 <div class="box">
 <h2>Which Gallery Would you Like to edit?</h2>
 <ul>

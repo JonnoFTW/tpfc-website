@@ -1,5 +1,4 @@
-<div class="grid_9">
-<div class="box">
+<div class="col-md-9">
 <?
 echo heading("View User",2);
 echo $msg;
@@ -33,6 +32,5 @@ echo "</p>";
 echo form_fieldset_close();
 echo form_close();
 ?>
-</div>
 </div>
 </div>

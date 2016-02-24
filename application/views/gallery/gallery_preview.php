@@ -2,19 +2,23 @@
 // Previewing all images in a gallery
 ?>
 <div class="col-md-12">
-<div class="box">
+<div class="row">
 <?
 echo "<p>$gdescription</p>";
 //var_dump($images);
-echo $image_table;
-/*
+//echo $image_table;
+$idx = 0;
 foreach($images as $i) { 
- echo "<div class='grid_2 box'>\n";
- $img = img('assets/images/thumbs/'.$i['link']).'<br/>'.character_limiter($i['description'],40);
+ echo "<div class='col-md-2 box'><div class='thumbnail'>\n";
+ $img = img(['src'=>'assets/images/thumbs/'.$i['link']]).'<div class="caption"><p>'.character_limiter($i['description'],40);
  echo anchor('gallery/view/'.$i['gid'].'/'.$i['iid'],$img);
- echo "\n</div>\n";
+ echo "</p></div>\n</div>\n</div>";
+ $idx++;
+ if($idx % 6 === 0) {
+	echo "</div><div class='row'>";
 }
-*/
+}
+
  ?>
 </div>
 </div>

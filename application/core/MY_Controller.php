@@ -1,20 +1,25 @@
 <?php
 class  MY_Controller  extends  CI_Controller  {
-	
-	function __construct(){ 
-		parent::__construct();	
-		$this->load->helper('url');
-		$this->load->helper('html');
-		$this->load->helper('form');
-		$this->load->database();
-		$this->load->library('session');
-		$this->load->library('uri');
-		$this->data['menu'] = $this->_generate_menu(); 
+
+    function __construct(){ 
+        parent::__construct();    
+        $this->load->helper('url');
+        $this->load->helper('html');
+        $this->load->helper('form');
+        $this->load->database();
+        $this->load->library('session');
+        //$this->load->library('uri');
+        $this->data['menu'] = $this->_generate_menu(); 
         $res = $this->db->get('info');
         $row = $res->row_array();
         $this->data['LOCATION_X'] = $row['club_locationLNG'];
         $this->data['LOCATION_Y'] = $row['club_locationLAT'];
         $this->data['email'] = $row['club_email'];
+        $this->db->select('users.email, users.phone')->where('email =','jenny.cassidy@hotmail.com');
+        $this->db->from('users');
+        $query = $this->db->get();
+        $this->data['phone'] = $query->result_array()[0]['phone'];
+
         $this->data['pass_salt'] = '$2a$07$FdAQgn8nY8NdOqs9OIGIGA$';
         $this->data['msg'] = '';
         $this->data['scripts'] = $this->load->view('google_analytics',null,true);
@@ -22,7 +27,7 @@ class  MY_Controller  extends  CI_Controller  {
             $this->output->enable_profiler(TRUE);
             $this->data['scripts'] .= $this->load->view('admin/benchmark_view',$this->data,true);
         }
-	}
+    }
     protected function _titleAnchor($title,$link = '', $dropdown=false) {
         $attrs = [];
         if($dropdown)
@@ -31,14 +36,20 @@ class  MY_Controller  extends  CI_Controller  {
                        'role'=>"button",
                        'aria-haspopup'=>"true",
                        'aria-expanded'=>"false"];
-        return anchor($link.strtolower($title),
+        return anchor($title=='Home'?'/':$link.strtolower($title),
                       ucwords(str_replace('_',' ',htmlentities($title))).($dropdown?' <span class="caret"></span>':''),
                       $attrs);
     }
     
-    protected function _get_articles($link='',$changes=false) {
+    protected function _get_articles($link='',$changes=false, $list_group=false, $no_home=false, $only_editable=true) {
         $out = '';
-        $result = $this->db->order_by('aid','asc')->join('users','users.uid = articles.updated_by','left')->get('articles'); //get_where('articles',array('parent'=>null)); 
+        if($no_home) {
+                $this->db->where("articles.title != 'Home'");
+        }
+        if($only_editable) {
+            $this->db->where('articles.editable = 1');
+        }
+        $result = $this->db->order_by('position','desc')->join('users','users.uid = articles.updated_by','left')->get('articles'); //get_where('articles',array('parent'=>null)); 
         $pages = $result->result_array();
         
         //Links to pages
@@ -54,11 +65,16 @@ class  MY_Controller  extends  CI_Controller  {
                         $subs[] = $suba;
                     }
                 }
-                if($subs) {
+                if($subs && !$list_group) {
                     $out .=  "<li class='dropdown'>".$this->_titleAnchor($i['title'],$link, true);
                 } else {
                     $segment = $this->uri->segment(1);
-                    $out .= "<li ".($segment===strtolower($i['title'])||(!$segment && $i['title']=='Home')?'class="active"':"").">";
+                    $class = '';
+                    if ($segment===strtolower($i['title'])||(!$segment && $i['title']=='Home'))
+                        $class .= 'active ';
+                    if ($list_group)
+                        $class .= 'list-group-item';
+                    $out .= "<li class='$class'>";
                     $out .= $this->_titleAnchor($i['title'],$link);
                 }
                 if($changes)
@@ -76,28 +92,25 @@ class  MY_Controller  extends  CI_Controller  {
       * What the hell do you think it might do?
       *
       */
-	private function _generate_menu(){
+    private function _generate_menu(){
         $out = "<ul class=\"nav navbar-nav\">";
-		$out .= $this->_get_articles();
+        $out .= $this->_get_articles('',false,false,true, false);
        
-        foreach(array('Resources'=>"Documents",'Gallery'=>"The photo Gallery",'Contact'=>"Contact TPFC") as $i=>$v) {
-            $out .= "<li>".anchor(current(explode(' ',strtolower($i))),$i)."</li>";
+        $out .= '</ul><ul class="nav navbar-nav navbar-right">';
+        if($this->session->userdata('name')){
+
+            $out .= "<li>".anchor('admin','Admin')."</li>\n";
+            $out .= "<li>".anchor('login/logout','Logout')."</li>\n";
+
         }
-	    $out .= '<ul class="nav navbar-nav navbar-right">';
-		if($this->session->userdata('name')){
-
-			$out .= "<li>".anchor('admin','Admin')."</li>\n";
-			$out .= "<li>".anchor('login/logout','Logout')."</li>\n";
-
-		}
-		else{
-			//Add login box possibly
-			$out .= "<li >".anchor('login','Login')."</li>";
-		}
+        else{
+            //Add login box possibly
+            $out .= "<li >".anchor('login','Login')."</li>";
+        }
        
-        $out .= "</ul></ul>";
-		return $out;
-	}
+        $out .= "</ul>";
+        return $out;
+    }
 
 } 
 /**
@@ -106,13 +119,13 @@ class  MY_Controller  extends  CI_Controller  {
 class MY_Admin extends MY_Controller {
 
     function __construct(){
-		parent::__construct();
+        parent::__construct();
         $this->load->library('user_agent');
         //    var_dump($this->session->all_userdata());
         $this->data['title'] = 'Administration';
         if(!$this->session->userdata('logged')){
             if($this->input->is_ajax_request()) {
-                echo "Request failed, you will need to login</br>";
+                echo "Request failed, you will need to login<br>";
                 return;
             }
             else
@@ -121,7 +134,7 @@ class MY_Admin extends MY_Controller {
         else{
             $articles[] = anchor('admin/forms#list','Forms and Resources'); 
             $this->data['articles'] = $articles;
-            $this->data['article_list'] = '<ul>'.$this->_get_articles('admin/article/edit/').'</ul>';
+            $this->data['article_list'] = '<ul>'.$this->_get_articles('admin/article/edit/', false,false).'</ul>';
             $this->data['article_list_edits'] = '<ul>'.$this->_get_articles('admin/article/edit/',true).'</ul>';
             $result = $this->db->get('galleries');
             $this->data['galleries'] = $result->result_array();

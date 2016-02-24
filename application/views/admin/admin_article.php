@@ -1,6 +1,6 @@
-<div class="grid_9">
-<div class="box">
-<!--<script src="<? echo base_url();?>assets/scripts/nicEdit.js" type="text/javascript"></script>-->
+<div class="col-md-9">
+<div class="panel panel-default">
+<? /*
 <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script> 
 <script type="text/javascript">
 bkLib.onDomLoaded(function() {
@@ -8,29 +8,55 @@ bkLib.onDomLoaded(function() {
 });
 
 </script>
-						
+*/
+?>
+<script type="text/javascript" src="/assets/scripts/bootstrap3-wysihtml5.all.min.js"></script> 
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#edit').wysihtml5({
+        "emphasis": true, //Italics, bold, etc. Default true
+        "html": true, //Button which allows you to edit the generated HTML. Default false
+        "blockquote": true, //Blockquote  
+        'toolbar':{'fa':true}
+    });
+});
+</script>
+<div class="panel-heading">				
 <?
-echo "<h2>Now editing: {$article['title']}</h2>"; 
+echo "Editing: {$article['title']}"; 
+?>
+</div>
+<div class="panel-body">
+<?
 echo $msg;
-echo form_open("admin/article/edit/{$article['title']}");
-echo "<p>";
-echo form_textarea(array('value'=>$article['article'],'cols'=>'82','id'=>'edit','name'=>'article'));
-echo "</p>";
+echo form_open("admin/article/edit/{$article['title']}",['class'=>'form-horizontal']);
+echo form_hidden('aid', $article['aid']);
+echo "<div class='form-group'>";
+echo form_textarea(['value'=>$article['article'],'style'=>'width:100%', 'id'=>'edit','name'=>'article']);
+echo "</div>";
 if(!$article['permanent']) {
-    echo "<p>";
-    echo form_label('Title','title');
-    echo form_input('title',$article['title']);
-    echo "</p>";
-    echo "<p>";
-    echo form_label('Parent Article','parent');
-    echo form_dropdown('parent',$parents,$article['parent']);
-    echo "</p>";
-    echo "<p>";
-    echo form_label('Permanently Delete this Article','Delete');
-    echo form_checkbox('delete',"delete");
-    echo "</p>";
+    echo "<div class='form-group'>";
+    echo form_label('Title','title',['class'=>'control-label col-sm-2']);
+    echo '<div class="col-sm-10">';
+    echo form_input(['name'=>'title','value'=>$article['title'], 'class'=>'form-control','id'=>'title']);
+    echo "</div></div>";
+    
+    echo "<div class='form-group'>";
+    echo form_label('Parent Article','parent',['class'=>'control-label col-sm-2']);
+    echo '<div class="col-sm-10">';
+    echo form_dropdown('parent',$parents,$article['parent'],"class='form-control' id='parent'");
+    echo "</div></div>";
+    
+    echo "<div class='form-group'>";
+    echo form_label('Permanently Delete','delete',['class'=>'control-label col-sm-2','id'=>'delete']);
+    echo '<div class="col-sm-10"><div class="checkbox">';
+    
+    echo form_checkbox(['name'=>'delete','value'=>"delete",'id'=>'delete','checked'=>false]);
+    echo "</div></div></div>";
 }
-echo form_submit('save','Save');
+echo '<div class="form-group"><div class="col-sm-offset-2 col-sm-10">';
+echo form_submit(['name'=>"save", 'content'=>'Save', 'value'=>"Save", 'class'=>'btn btn-default']);
+echo "</div></div>";
 echo form_close();
 ?>
 </div>

@@ -9,7 +9,7 @@ $(document).ready( function() {
     $("form#images").submit( function(event) {
         event.preventDefault();
         var forms = {}; // hold all the data from the images
-        $("form#images div.grid_3").each( function() {
+        $("form#images div.col-md-3").each( function() {
             var id = $(this).attr("imgid");
             forms[id] = {
                 "delete":$(this).find("input").last().is(":checked"),
@@ -17,7 +17,7 @@ $(document).ready( function() {
                 "description":$(this).find('input[name="description"]').first().attr("value")
             };
         });
-        var del = $("form#images  div.grid_3  input:checked").length;
+        var del = $("form#images  div.col-md-3  input:checked").length;
         if(del){
             var answer = confirm('You are about to delete '+del+' images, is this okay?');
             $('input:checked').parent().remove();
@@ -40,7 +40,7 @@ $(document).ready( function() {
     });
 });
 </script>
-<div class="grid_9">
+<div class="col-md-9">
 <div class="box block">
 <? 
 echo "<div class='clear'></div>";
@@ -53,7 +53,7 @@ echo $msg;
 echo form_open('admin/gallery/update_images',array("id"=>"images"));
 echo form_fieldset("Update/Delete Existing Images");
 foreach($images as $i) {
-    echo "<div class='grid_3 box' imgid='{$i['iid']}' style='background: #DDD;'>".img('assets/images/thumbs/'.$i['link']);
+    echo "<div class='col-md-3 box' imgid='{$i['iid']}' style='background: #DDD;'>".img('assets/images/thumbs/'.$i['link']);
     echo "<p>";
     echo form_label('Title','title');
     echo form_input('title',$i['title']);

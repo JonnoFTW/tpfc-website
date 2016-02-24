@@ -1,18 +1,19 @@
 <style type="text/css">
-    #side_list, ul {margin-bottom:5px;}
 </style>
-<div class="grid_3">
-<div class="box" id="side_list">
-   <h2>Manage</h2>
-
+<div class="col-md-3">
+<div class="panel panel-primary">
+<div class="panel-heading">Manage</div>
+<div class="list-group">
     <?
-    echo heading(anchor('admin/users',"Users"),3); 
-    echo heading(anchor('admin/article','Pages'),3); 
+    echo '<div class="list-group-item">'.anchor('admin/users',"Users")."</div>"; 
+    echo anchor('admin/article','<h4 class="list-group-item-heading">Pages</h4>',['class'=>'list-group-item active']); 
     echo $article_list;
+
+    echo anchor('admin/gallery','<h4 class="list-group-item-heading">Gallery</h4>',['class'=>'list-group-item active']); 
     ?>
-    <h3><? echo anchor('admin/gallery','Gallery'); ?></h3>
-    <ul>
-     <? foreach($galleries as $i){echo "<li>".anchor('admin/gallery/gid/'.$i['gid'],$i['title'])."</li>";} ?>
+    <ul class="list-group">
+     <? foreach($galleries as $i){echo "<li class='list-group-item'>".anchor('admin/gallery/gid/'.$i['gid'],$i['title'])."</li>";} ?>
      </ul>
+</div>
 </div>
 </div>

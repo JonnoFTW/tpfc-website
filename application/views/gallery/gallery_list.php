@@ -1,14 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 ?>
 
-<div class="grid_12"> 
+<div class="col-md-12"> 
 
 <div class="box">
-<h2>Galleries</h2>
 <ul>
 <?
 foreach($galleries as $i){
-    echo '<li><h5>'.anchor('gallery/view/'.$i['gid'],$i['title']).'</h5> <p>'.$i['description'].'</p></li>';
+    echo '<li><h4>'.anchor('gallery/view/'.$i['gid'],$i['title']).'</h4> <p>'.$i['description'].'</p></li>';
 }
 ?>
 </ul>

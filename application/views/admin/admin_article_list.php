@@ -1,15 +1,13 @@
-<div class="grid_9">
-<div class="box">
-<div class="clear">
-<? echo $msg; ?>
+<div class="col-md-9">
+<div class="panel panel-default">
+<div class="panel-heading">
+Which Page Would you Like to edit?
 </div>
-<h2>Which Page Would you Like to edit?</h2>
-<ul>
+<div class="panel-body">
+<? echo $msg; ?>
 <?
 echo $article_list_edits; 
 ?>
-</div>
-<div class="box">
 <?
 echo heading("Make a New Page",2);
 if(isset($msg))

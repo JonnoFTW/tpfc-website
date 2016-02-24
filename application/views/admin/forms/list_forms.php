@@ -38,7 +38,7 @@ $(document).ready( function() {
 });
 </script>
 
-<div class="grid_12">
+<div class="col-md-12">
 <a id="list"></a>
     <div class="box">
 		<?
