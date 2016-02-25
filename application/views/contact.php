@@ -60,6 +60,8 @@ foreach($mails as $i){
 </div>
 <div class="row">
     <div class="col-md-12">
+<h3>Postal Address</h3>
+Please send us an email to get our postal address.
     <h3>Directions</h3>
 <ul class="content-list">
 <li>By car, heading south from the city towards Noarlunga, get onto Lonsdale Road (also called Ocean Boulevard and Brighton Road)</li>

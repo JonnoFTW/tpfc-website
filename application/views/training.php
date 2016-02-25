@@ -15,7 +15,7 @@
       '</div>'+
       '<h3 id="firstHeading" class="firstHeading">Trott Park Fencing Club</h3>'+
       '<div id="bodyContent">'+
-      '<b>TPFC</b>, meets at 7PM on Wednesdays during <br>school terms in the gym ' +
+      '<b>TPFC</b>, meets at 7 PM on Wednesdays during <br>school terms in the gym ' +
       ' at Sheidow Park Primary School'+
       '</div>'+
       '</div>';

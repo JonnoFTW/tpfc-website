@@ -134,8 +134,14 @@ class MY_Admin extends MY_Controller {
         else{
             $articles[] = anchor('admin/forms#list','Forms and Resources'); 
             $this->data['articles'] = $articles;
-            $this->data['article_list'] = '<ul>'.$this->_get_articles('admin/article/edit/', false,false).'</ul>';
-            $this->data['article_list_edits'] = '<ul>'.$this->_get_articles('admin/article/edit/',true).'</ul>';
+            $rows = $this->db->get_where('articles', 'editable = 1')->result_array();
+            $row_labels = [];
+            foreach($rows as $v) {
+                $row_labels[] = $this->_titleAnchor($v['title']);
+            }
+            $articles = ul($row_labels);
+            $this->data['article_list'] = $articles;//'<ul>'.$this->_get_articles('admin/article/edit/', false,false).'</ul>';
+            $this->data['article_list_edits'] = '<ul>'.$this->_get_articles('admin/article/edit/',true, true).'</ul>';
             $result = $this->db->get('galleries');
             $this->data['galleries'] = $result->result_array();
             $this->data['main_content'] = $this->load->view('admin/admin_side',$this->data,true);

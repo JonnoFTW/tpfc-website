@@ -13,21 +13,20 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/css/lavish-bootstrap.css">
     <link rel="stylesheet" href="/assets/css/bootstrap3-wysihtml5.min.css">
-    <link href='http://fonts.googleapis.com/css?family=Arvo:400,700|Signika:400,300|Cuprum:400,400italic|Sanchez|Pontano+Sans|Kreon:400,700|Cookie|Lato' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Signika:400,300|Cuprum:400,400italic|Sanchez|Pontano+Sans|Kreon:400,700|Cookie|Lato' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- Latest compiled and minified JavaScript -->
 <link rel="stylesheet" href="/assets/css/footer-distributed-with-address-and-phones.css">
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.3.0/lodash.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css">
 	<link rel="stylesheet" href="/assets/css/homepage.css"/>
     <? 
     echo link_tag('favicon.ico', 'shortcut icon', 'image/ico');
     ?>
-<link href='https://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'>
-       
     <style type="text/css">
 .main-title {
-    font-family: 'Arvo', serif;
+    font-family: 'Sanchez', serif;
     color: #fff !important;
     padding-bottom:30px;
 }
@@ -44,16 +43,20 @@ body {
   /* Negative indent footer by its height */
   margin: 0 auto -60px;
   /* Pad bottom by footer height */
-  padding: 0 0 60px;
+  padding: 0 0 0px;
 }
 #footer {
   height: 60px;
   background-color: #f5f5f5;
 }
-
-.navbar-nav > li, .navbar-brand {
-    font-family:'Pontano Sans' ,'Helvetica Neue', Helvetica, Arial, sans-serif !important;
-    font-weight:700 !important;
+.navbar-header {
+    font-size:14pt !important;
+}
+.navbar-nav > li {
+    font-family:'Cuprum' ,'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    font-weight:400 !important;
+    font-size:14pt;
+    letter-spacing: 0.04em;
 }
 .col-md-12 h1 {
     float:right; 
@@ -64,7 +67,14 @@ body {
     
 }
 .jumbotron {
-    background-image: radial-gradient(ellipse closest-side,#4527A0 ,#4F364C);
+   /* background-image: radial-gradient(ellipse closest-side,#4527A0 ,#4F364C);*/
+background: -moz-radial-gradient(center, ellipse cover, #4527A0 0%, #4F364C 100%); /* ff3.6+ */
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #4527A0), color-stop(100%, #4F364C)); /* safari4+,chrome */
+background: -webkit-radial-gradient(center, ellipse cover, #4527A0 0%, #4F364C 100%); /* safari5.1+,chrome10+ */
+background: -o-radial-gradient(center, ellipse cover, #4527A0 0%, #4F364C 100%); /* opera 11.10+ */
+background: -ms-radial-gradient(center, ellipse cover, #4527A0 0%, #4F364C 100%); /* ie10+ */
+background: radial-gradient(ellipse at center, #4527A0 0%, #4F364C 100%); /* w3c */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4527A0', endColorstr='#4F364C',GradientType=0 ); /* ie6-9 */
 }
 .vertical-center {
 
@@ -91,8 +101,7 @@ body {
 }
 
 h3,h4,h5 {
-    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-weight:700;
+    font-family:Sanchez;
 }
 .carousel-indicators {
     right: 50%;
@@ -136,7 +145,10 @@ footer {
   color: #8E6AB3;
 }
 .page-header {
-    font-family:Arvo, serif;
+    font-family:Sanchez, serif;
+}
+a.navbar-brand {
+    font-family:Sanchez, serif;
 }
 .bot-logo {
 /*   -moz-transform: scaleX(-1);
@@ -145,6 +157,11 @@ footer {
     transform: scaleX(-1);
     filter: FlipH;
     -ms-filter: "FlipH";*/
+}
+#logo {
+/*    -webkit-box-shadow: 0px 30px 40px -25px rgba(0, 0, 0, 1);
+    -moz-box-shadow:    0px 30px 40px -25px rgba(0, 0, 0, 1);
+    filter: drop-shadow(10px 10px 20px #222);        0px 30px 40px -25px rgba(0, 0, 0, 1);*/
 }
 
     </style>
@@ -220,11 +237,11 @@ Trott Park Fencing Club  <div class="fb-like"
       </div>
     </nav>
     <?
-    if($title == "Home") {
+    if($title == "Home" || $title == "Test") {
     ?>
   <div class="jumbotron text-center">
       <div class="container">
-      <? echo img(['src'=>'assets/images/hedgielogo.png', 'style'=>'width:130px']);?>
+      <? echo img(['src'=>'assets/images/hedgielogo.png', 'style'=>'width:130px','id'=>'logo']);?>
       <h1 class="main-title">
 <?// echo img('assets/images/hedgielogo_small.png');?>
 
@@ -280,7 +297,7 @@ if(isset($home_content)) {
       <? 
       if($title != "Home") {
       ?>
-    <div class="page-header">
+    <div class="page-header text-center">
       <h1>
       <?
 	if(isset($p)) echo $p;
@@ -307,7 +324,7 @@ if(isset($home_content)) {
 
         <div>
             <i class="fa fa-map-marker"></i>
-            <p>21 Adams Road, Sheidow Park, South Australia</p>
+            <p><? echo anchor('contact', 'Sheidow Park, South Australia');?></p>
         </div>
 
         <div>

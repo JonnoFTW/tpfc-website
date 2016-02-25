@@ -8,7 +8,7 @@
 			</colgroup>
 			<thead>
 				<tr>
-					<th colspan="3" class="table-head">General Resources</th>
+					<th colspan="3" class="table-head">General Documents</th>
 				</tr>
 				<tr>
 					<th>Link</th>
@@ -31,7 +31,7 @@ foreach($res as $i){form($i);}
 			</colgroup>
 			<thead>
 				<tr>
-					<th colspan="3" class="table-head">Competition Resources</th>
+					<th colspan="3" class="table-head">Competition Documents</th>
 				</tr>
 				<tr>
 					<th>Link</th>
