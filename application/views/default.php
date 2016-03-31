@@ -30,17 +30,20 @@
     color: #fff !important;
     padding-bottom:30px;
 }
-    html,
+#content {
+    padding-bottom: 60px;
+}
+html,
 body {
   height: 100%;
   /* The html and body elements cannot have any padding or margin. */
 }
-
-    #wrap {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-  /* Negative indent footer by its height */
+.page-header {
+    border-bottom: 0;
+}
+#wrap {
+  background-image: url('/assets/images/wavegrid.png');
+ 
   margin: 0 auto -60px;
   /* Pad bottom by footer height */
   padding: 0 0 0px;
@@ -128,12 +131,23 @@ h3,h4,h5 {
 }
 
 .carousel-indicators .active {
-background: #333333;
+    background: #333333;
+}
+.carousel-inner {
+    height: 175px;
 }
 .img-responsive {
     height: 155px;
     background-size:100% !important;
     background-repeat:no-repeat;
+}
+@media (max-width: 992px) {
+    .img-responsive {
+        height: 300px;
+    }
+    .carousel-inner {
+        height: 300px;
+    }
 }
 .container .text-muted {
   margin: 20px 0;
@@ -158,6 +172,7 @@ a.navbar-brand {
     filter: FlipH;
     -ms-filter: "FlipH";*/
 }
+
 #logo {
 /*    -webkit-box-shadow: 0px 30px 40px -25px rgba(0, 0, 0, 1);
     -moz-box-shadow:    0px 30px 40px -25px rgba(0, 0, 0, 1);
@@ -185,21 +200,21 @@ window.initCarousel = function() {
     car.empty();
     var active = true;
     _.forEach(_.chunk(data.data.slice(0,24), 4),function(group) {
-    var item = $("<div class='item'><div class='row'>");
-    if(active) {
-    item.addClass('active');
-    active = false;
-    }
-    _.forEach(group, function(val, idx) {
-    var elem = $("<div class='col-sm-3'><a><div class='img-responsive thumbnail'></div></a></div>");
-    if (idx) {
-    elem.addClass('hidden-xs hidden-sm');
-    }
-    elem.find('a').attr("href",val.link).attr("alt",val.name).attr("title",val.name).attr('target', '_blank');
-    elem.find('.img-responsive').css("background","url('"+val.images[4].source+"') 50% 50% no-repeat");
-    item.find('.row').append(elem);
-    });
-    car.append(item);
+        var item = $("<div class='item'><div class='row'>");
+        if(active) {
+            item.addClass('active');
+            active = false;
+        }
+        _.forEach(group, function(val, idx) {
+            var elem = $("<div class='col-md-3'><a><div class='img-responsive thumbnail'></div></a></div>");
+            if (idx) {
+                elem.addClass('hidden-xs hidden-sm');
+            }
+            elem.find('a').attr("href",val.link).attr("alt",val.name).attr("title",val.name).attr('target', '_blank');
+            elem.find('.img-responsive').css("background","url('"+val.images[4].source+"') 50% 50% no-repeat");
+            item.find('.row').append(elem);
+        });
+        car.append(item);
     });
     window.setupCarousel();
     });
@@ -267,7 +282,7 @@ Trott Park Fencing Club</h1>
     </ol>
     <!-- Carousel items -->
     
-    <div class="carousel-inner" style="height:175px">
+    <div class="carousel-inner">
     <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate vcenter text-center" style="color:#fff;font-size: 40px;margin-top: 50px;"></span>
     </div>
        

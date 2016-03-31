@@ -1,5 +1,6 @@
+<div class="panel panel-default">
+<div class="panel-body">
 <div class="col-md-12">
-<div class="container">
 <div class="block" id="tables">
 		<table class="table table-striped">
 			<colgroup>
@@ -47,4 +48,6 @@ foreach($comp as $i){
  			</tbody>
 		</table>
 	</div>
+
+</div>
 </div>

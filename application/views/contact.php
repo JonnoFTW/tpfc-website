@@ -1,3 +1,5 @@
+<div class="panel panel-default">
+<div class="panel-body">
 <div class="row">
 <div class="col-md-4">
     <h3>Contact Persons</h3>
@@ -16,7 +18,11 @@ foreach($mails as $i){
  ?>			
 			</tbody>
 		</table>
+         <h3>Postal Address</h3>
+<p>Please send us an email to get our postal address.</p>
  </div>
+ 
+
  <div class="col-md-8">
  
 	<h3>
@@ -60,8 +66,7 @@ foreach($mails as $i){
 </div>
 <div class="row">
     <div class="col-md-12">
-<h3>Postal Address</h3>
-Please send us an email to get our postal address.
+
     <h3>Directions</h3>
 <ul class="content-list">
 <li>By car, heading south from the city towards Noarlunga, get onto Lonsdale Road (also called Ocean Boulevard and Brighton Road)</li>
@@ -72,4 +77,6 @@ Please send us an email to get our postal address.
 </ul>
 <div class="map_canvas" style="width:100%;height:950px;"></div>
     </div>
+</div>
+</div>
 </div>

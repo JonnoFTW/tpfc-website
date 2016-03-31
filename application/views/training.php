@@ -10,7 +10,7 @@
     center: new google.maps.LatLng(-35.070891,138.532675),
     zoom: 16,
     mapTypeId: google.maps.MapTypeId.ROAD
-  }; var contentString = '<div id="content">'+
+  }; var contentString = '<div>'+
       '<div id="siteNotice">'+
       '</div>'+
       '<h3 id="firstHeading" class="firstHeading">Trott Park Fencing Club</h3>'+

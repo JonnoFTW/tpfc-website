@@ -1,0 +1,5 @@
+update the gallery and its uploader
+https://blueimp.github.io/Bootstrap-Image-Gallery/
+
+update the page editor to use summernote
+http://summernote.org/#/getting-started
