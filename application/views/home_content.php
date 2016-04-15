@@ -1,3 +1,46 @@
+<div class="jumbotron text-center">
+      <div class="container">
+      <? echo img(['src'=>'assets/images/hedgielogo.png', 'style'=>'width:130px','id'=>'logo']);?>
+      <h1 class="main-title">
+<?// echo img('assets/images/hedgielogo_small.png');?>
+
+Trott Park Fencing Club</h1>
+      <? 
+       /*foreach(array('jquery.ui.core.min.js','jquery.ui.widget.min.js','jquery.ui.rcarousel.min.js') as $v) {
+    echo "<script type='text/javascript' src='". base_url()."assets/carousel/lib/$v'></script>\n";
+    }*/
+    ?>
+      <div class='col-md-12'>
+      <?  # insert some images from the db'
+    /* foreach($banner_images as $v) {
+    echo anchor("gallery/view/{$v['gid']}/{$v['iid']}",img("assets/images/thumbs/{$v['link']}"))."\n";
+    }*/?>
+     <div id="myCarousel" class="carousel slide">
+    <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+    <li data-target="#myCarousel" data-slide-to="3"></li>
+    <li data-target="#myCarousel" data-slide-to="4"></li>
+    <li data-target="#myCarousel" data-slide-to="5"></li>
+    </ol>
+    <!-- Carousel items -->
+    
+    <div class="carousel-inner">
+    <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate vcenter text-center" style="color:#fff;font-size: 40px;margin-top: 50px;"></span>
+    </div>
+       
+      </div><!--/myCarousel-->
+    <a class="btn btn-default btn-circle left carousel-control" href="#myCarousel" data-slide="prev"><i class="fa fa-arrow-left"></i></a>
+   <a class="btn btn-default btn-circle right carousel-control" href="#myCarousel" data-slide="next"><i class="fa fa-arrow-right"></i></a>
+    </div>
+    <script type="text/javascript">
+    window.initCarousel();
+    </script>
+      </div>
+    </div>
+
+
 <div class="home-row" id="blue">
     <div class="container">
     <h1 class="text-primary-inverse text-center" >Come and Try!</h1>
@@ -6,7 +49,7 @@
             <div class="service-box">
                <i class="fa fa-5x fa-map-marker wow bounceIn text-primary-inverse" style="visibility: visible; animation-name: bounceIn;"></i>
                 <h3>Where</h3>
-                <p class="text-muted"><? echo anchor('contact','Sheidow Park <br>Primary School Gym');?></p>
+                <p class="text-muted"><? echo anchor('contact#bigmap','Sheidow Park <br>Primary School Gym');?></p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 text-center">
@@ -43,7 +86,7 @@
     <div class="container">
         <div class="row vertical-align" style="padding: 80px 0 80px">
             <div class="col-sm-3 col-sm-offset-1">
-                <h1 class="text-primary-inverse text-center row-title">Help Us <br>Grow</h1>
+                <h1 class="text-primary-inverse text-center row-title"><a href="https://asf.org.au/project/fencing-equipment">Help Us <br>Grow</a></h1>
             </div>
             <div class="col-sm-1" style="padding-top:40px;">
                 <i class="fa fa-4x fa-heart wow bounceIn text-primary-inverse text-center" data-wow-delay=".9s" style="width:100%; color:#fff;visibility: visible; animation-delay: 0.2s; animation-name: bounceIn;"></i>
@@ -58,16 +101,18 @@
 
 <div class="home-row parallax-img text-center">
     <img class="parallax" id="lunge" data-parallax='{"y": 300}' src="http://i.imgur.com/4NSpamc.jpg"> 
-    <p>Fun for ages 8 and up</p> 
+    <p>Fun for all ages 8 and up</p> 
 </div>
 
 <div class="home-row" id="group-row">
     <div class="container">
-    
+        <div class="row">
+           <div class="col-xs-2 col-xs-offset-5"><img src="/assets/images/three.png" class="wow bounceIn" data-wow-delay="1s"/></div>
+        </div>
         <h1 class="text-primary-inverse text-center">Group Sessions Available</h1>
         <div class="row">
             <div class="col-sm-6 col-sm-offset-3 text-center">
-                <p><a href="/contact">Contact us</a> about providing a special event for your community group or school</p>
+                <p><a href="/contact">Contact us</a> about providing a special event for your community group or a series of lessons for your school</p>
             </div>
         </div>
     </div>
@@ -78,6 +123,9 @@
 <script src="/assets/scripts/jquery.easing.1.3.js"></script>
 <script src="/assets/scripts/jquery.parallax-scroll.js"></script>
 <script>
+$(document).ready(function() {
+    WOW().init();
+});
 var mobileWidth = 1052;
 var data_parallax = {};
 var scale = 0.2;

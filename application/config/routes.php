@@ -42,6 +42,8 @@ $route['seo/sitemap\.xml'] = "seo/sitemap";
 $route['default_controller'] = "page";
 $route['404_override'] = '';
 $route['admin'] = 'admin/home';
+$route['documents'] = '/resources';
 $route['^((?!admin|gallery|contact|resources|training|download|login|page)(.*))$'] = 'page/show/$1';
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

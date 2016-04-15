@@ -1,7 +1,7 @@
 <div class="panel panel-default">
 <div class="panel-body">
 <div class="row">
-<div class="col-md-4">
+<div class="col-md-6">
     <h3>Contact Persons</h3>
 		<table class="table table-striped table-bordered" >
 			<thead>
@@ -20,13 +20,8 @@ foreach($mails as $i){
 		</table>
          <h3>Postal Address</h3>
 <p>Please send us an email to get our postal address.</p>
- </div>
- 
-
- <div class="col-md-8">
- 
 	<h3>
-		<a href="#" id="toggle-login-forms">Send us an email enquiry</a>
+		Send us an email enquiry
 	</h3>
 	<div class="block" >
    <p> Contact us using this email <? echo safe_mailto($email); ?> directly, or use the convenient form below.</p>
@@ -63,9 +58,7 @@ foreach($mails as $i){
 		</form>
 	</div>
 </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
+<div class="col-md-6"  id="bigmap">
 
     <h3>Directions</h3>
 <ul class="content-list">
@@ -79,4 +72,6 @@ foreach($mails as $i){
     </div>
 </div>
 </div>
+
 </div>
+    

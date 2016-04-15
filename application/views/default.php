@@ -1,6 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="en">
   <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +11,8 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/css/lavish-bootstrap.css">
-    <link rel="stylesheet" href="/assets/css/bootstrap3-wysihtml5.min.css">
+    
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Signika:400,300|Cuprum:400,400italic|Sanchez|Pontano+Sans|Kreon:400,700|Cookie|Lato' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- Latest compiled and minified JavaScript -->
@@ -33,6 +33,7 @@
 #content {
     padding-bottom: 60px;
 }
+
 html,
 body {
   height: 100%;
@@ -138,8 +139,9 @@ h3,h4,h5 {
 }
 .img-responsive {
     height: 155px;
-    background-size:100% !important;
+    background-size:cover !important;
     background-repeat:no-repeat;
+    background-position: center center;
 }
 @media (max-width: 992px) {
     .img-responsive {
@@ -211,7 +213,7 @@ window.initCarousel = function() {
                 elem.addClass('hidden-xs hidden-sm');
             }
             elem.find('a').attr("href",val.link).attr("alt",val.name).attr("title",val.name).attr('target', '_blank');
-            elem.find('.img-responsive').css("background","url('"+val.images[4].source+"') 50% 50% no-repeat");
+            elem.find('.img-responsive').css("background","url('"+val.images[4].source+"')");
             item.find('.row').append(elem);
         });
         car.append(item);
@@ -250,60 +252,10 @@ Trott Park Fencing Club  <div class="fb-like"
      <? echo $menu; ?>
     </div><!--/.nav-collapse -->
       </div>
-    </nav>
-    <?
-    if($title == "Home" || $title == "Test") {
-    ?>
-  <div class="jumbotron text-center">
-      <div class="container">
-      <? echo img(['src'=>'assets/images/hedgielogo.png', 'style'=>'width:130px','id'=>'logo']);?>
-      <h1 class="main-title">
-<?// echo img('assets/images/hedgielogo_small.png');?>
-
-Trott Park Fencing Club</h1>
-      <? 
-       /*foreach(array('jquery.ui.core.min.js','jquery.ui.widget.min.js','jquery.ui.rcarousel.min.js') as $v) {
-    echo "<script type='text/javascript' src='". base_url()."assets/carousel/lib/$v'></script>\n";
-    }*/
-    ?>
-      <div class='col-md-12'>
-      <?  # insert some images from the db'
-    /* foreach($banner_images as $v) {
-    echo anchor("gallery/view/{$v['gid']}/{$v['iid']}",img("assets/images/thumbs/{$v['link']}"))."\n";
-    }*/?>
-     <div id="myCarousel" class="carousel slide">
-    <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
-    <li data-target="#myCarousel" data-slide-to="3"></li>
-    <li data-target="#myCarousel" data-slide-to="4"></li>
-    <li data-target="#myCarousel" data-slide-to="5"></li>
-    </ol>
-    <!-- Carousel items -->
-    
-    <div class="carousel-inner">
-    <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate vcenter text-center" style="color:#fff;font-size: 40px;margin-top: 50px;"></span>
-    </div>
-       
-      </div><!--/myCarousel-->
-    <a class="btn btn-default btn-circle left carousel-control" href="#myCarousel" data-slide="prev"><i class="fa fa-arrow-left"></i></a>
-   <a class="btn btn-default btn-circle right carousel-control" href="#myCarousel" data-slide="next"><i class="fa fa-arrow-right"></i></a>
-    </div>
-    <script type="text/javascript">
-    window.initCarousel();
-    </script>
-      
-      
-      </div>
-    </div>
-    <?
-     }
-?>
+</nav>
 <?
-if(isset($home_content)) {
-	 // load the parallax stuff
-	echo $home_content;
+if (isset($home)) {
+    echo $main_content;
 } else {
 ?>
 <div class="container">
@@ -328,11 +280,10 @@ if(isset($home_content)) {
     </div>
 </div>
 </div>
-</div>
-
 <?
 }
 ?>
+</div>
 
 <footer class="footer-distributed">
     <div class="footer-center">

@@ -66,6 +66,7 @@ class  MY_Controller  extends  CI_Controller  {
                     }
                 }
                 if($subs && !$list_group) {
+                    
                     $out .=  "<li class='dropdown'>".$this->_titleAnchor($i['title'],$link, true);
                 } else {
                     $segment = $this->uri->segment(1);
@@ -80,6 +81,9 @@ class  MY_Controller  extends  CI_Controller  {
                 if($changes)
                     $out .= " (last editted {$i['updated']} by {$i['first_name']}  {$i['last_name']})";
                 if($subs) {
+                 if($i['title'] == 'Resources') {
+                        $i['title'] = 'Documents';
+                    }
                     array_unshift($subs,$this->_titleAnchor($i['title'],$link),'');
                     $out .= ul($subs, ['class'=>'dropdown-menu']);
                 }

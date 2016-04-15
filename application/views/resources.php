@@ -22,7 +22,7 @@
 			<tbody>
 <?
 foreach($val as $i){
-	echo "<tr><th class=\"fixed\">".anchor('assets/documents/'.$i['file'],$i['title'])."</th><td>{$i['description']}</td></tr>";
+	echo "<tr><th class=\"fixed\">".anchor('assets/documents/'.$i['file'],str_replace('-', ' ', $i['title']))."</th><td>{$i['description']}</td></tr>";
 }
 
  ?>

@@ -26,9 +26,7 @@ class Article extends MY_Admin {
         if($this->input->post('article') && $title){
             $res= $this->db->get_where('articles',array('title'=>$title));
             $parent = $this->input->post('parent');
-            if(intval($parent) == -1 || $parent == false) {
-                $parent = null;
-            } else if($this->article_parent($parent) != null) {
+            if($this->article_parent($parent) != null) {
                 $this->data['msg'] = "Child articles cannot have children: " .$parent;
                 $this->index();
                 return;

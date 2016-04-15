@@ -19,7 +19,7 @@
 			<tbody>
 <?
 function form($i){
-	echo "<tr><th>".anchor('download/get/'.$i['fid'],$i['name'])."</th><td>{$i['description']}</td></tr>";
+	echo "<tr><th>".anchor('download/get/'.$i['fid'],str_replace('-', ' ',$i['name']))."</th><td>{$i['description']}</td></tr>";
 }
 foreach($res as $i){form($i);}
  ?>

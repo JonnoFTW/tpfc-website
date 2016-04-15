@@ -3,7 +3,8 @@
 
 <div class="col-md-12"> 
 
-<div class="box">
+<div class="panel panel-default">
+<div class="panel-body">
 <ul>
 <?
 foreach($galleries as $i){
@@ -12,5 +13,6 @@ foreach($galleries as $i){
 ?>
 </ul>
 All images appear here with the given consent of those persons that appear within them.
+</div>
 </div>
 </div>

@@ -7,7 +7,9 @@ class Page extends MY_Controller {
         $this->data['title'] = '';
 	}
 	public function index(){
-        $this->show('Home');
+        $this->data['main_content'] = $this->load->view('home_content', $this->data, true);
+        $this->data['home'] = True;
+        $this->load->view('default', $this->data);
 	}
 	public function getFBgallery() {
             $this->load->library('facebook');
