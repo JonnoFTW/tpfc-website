@@ -76,7 +76,15 @@ div.parallax-img img {
         font-size: 5em;
     }   
 }
-
+@media (max-width: 660px) {
+    .parallax-img img {
+          transform:scale(1.8);
+      -ms-transform:scale(1.8); /* IE 9 */
+       -moz-transform:scale(1.8); /* Firefox */
+       -webkit-transform:scale(1.8); /* Safari and Chrome */
+     -o-transform:scale(1.8); /* Opera */
+    }
+}
 #group-row {
     height: 370px;
     background-color: #3975B3;
