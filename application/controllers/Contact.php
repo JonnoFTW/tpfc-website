@@ -26,7 +26,8 @@ class Contact extends MY_Controller {
             $this->email->from($this->input->post('email'),$this->input->post('name'));
             $this->email->message($this->input->post('message'));
             $this->email->subject('TPFC Enquiry');
-            $this->email->to([$this->data['email'],'president@trottparkfencingclub.org.au']);
+            $this->email->to($this->data['email']);
+            $this->email->cc('trottparkfc@hotmail.com, president@trottparkfencingclub.org.au');
             $success = $this->email->send();
             $msg = '';
             if($success) {

@@ -23,7 +23,7 @@ class  MY_Controller  extends  CI_Controller  {
         $this->data['pass_salt'] = '$2a$07$FdAQgn8nY8NdOqs9OIGIGA$';
         $this->data['msg'] = '';
         $this->data['scripts'] = $this->load->view('google_analytics',null,true);
-        if($this->session->userdata('logged')){
+        if($this->session->userdata('logged') && !$this->input->is_ajax_request()){
             $this->output->enable_profiler(TRUE);
             $this->data['scripts'] .= $this->load->view('admin/benchmark_view',$this->data,true);
         }
@@ -149,6 +149,7 @@ class MY_Admin extends MY_Controller {
             $result = $this->db->get('galleries');
             $this->data['galleries'] = $result->result_array();
             $this->data['main_content'] = $this->load->view('admin/admin_side',$this->data,true);
+            
         }
     }
     
