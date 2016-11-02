@@ -10,13 +10,13 @@ class Members extends MY_Admin {
         $this->load->library(['table','form_validation']);
         $this->load->library('email');
         
-        $this->form_validation->set_rules('name', 'Name', 'htmlspecialchars|required|regex_match[/^[a-zA-Z]+,\s+[a-zA-Z]$/]');
+        $this->form_validation->set_rules('name', 'Name', 'htmlspecialchars|required|regex_match[/^[a-zA-Z]+,\s+[a-zA-Z]+$/]');
 		$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
 		$this->form_validation->set_rules('address', 'Address', 'htmlspecialchars');
 		$this->form_validation->set_rules('handedness','Handedness', 'in_list[R,L]');
 		$this->form_validation->set_rules('telephone','Telephone', 'regex_match[/^[\d ]+$/]');
 		$this->form_validation->set_rules('mobile','Mobile', 'regex_match[/^[\d ]+$/]');
-
+        $this->data['member_types'] = ['club', 'state'];
         $this->data['msg'] = '';
         $this->form_validation->set_rules('date','dob',function($dob) {
             if(date_create_format("Y-m-d",$dob)) {
@@ -183,7 +183,7 @@ class Members extends MY_Admin {
                 if(!checkdate(1,1,$year)) {
                     $errors[$uid][] = "Invalid year";
                 }
-                if(!in_array($level, ['club','state'])) {
+                if(!in_array($level, $this->data['member_types'])) {
                     $errors[$uid][] = "Invalid level";
                     continue;
                 }

@@ -224,7 +224,7 @@ window.initCarousel = function() {
     var car = $(".carousel-inner");
     car.empty();
     var active = true;
-    _.forEach(_.chunk(data.data.slice(0,24), 4),function(group) {
+    _.forEach(_.groupBy(data.data.slice(0,24), function(elem,idx){return Math.floor(idx/4)}),function(group) {
         var item = $("<div class='item'><div class='row'>");
         if(active) {
             item.addClass('active');

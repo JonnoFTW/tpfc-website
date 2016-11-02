@@ -8,7 +8,7 @@ Club Registrations <button class="btn btn-primary btn-sm" id="save">Save</button
 <span class="counter pull-right" style="padding:8px;"></span>
 </div>
 <div class="panel panel-body">
- <h4>Registrations should be in format year-level</h4>Levels are: club, state
+ <h4>Registrations should be in format year-level</h4>Levels are: <? echo join(', ',$member_types); ?>
  </div>
 <table class="table table-striped table-hover results">
 <thead>

@@ -119,12 +119,12 @@ Trott Park Fencing Club</h1>
 </div>
 
 </div>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
 <script src="/assets/scripts/jquery.easing.1.3.js"></script>
 <script src="/assets/scripts/jquery.parallax-scroll.js"></script>
 <script>
 $(document).ready(function() {
-    WOW().init();
+    new WOW().init();
 });
 var mobileWidth = 1052;
 var data_parallax = {};
