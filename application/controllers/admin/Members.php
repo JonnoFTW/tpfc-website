@@ -39,7 +39,7 @@ class Members extends MY_Admin {
     private function user_row($m, $year_date) {
         $out = "<tr id='member-{$m['id']}' data-id='{$m['id']}'>";
         $out .= "<td class='edit-user'><button type=\"button\" class=\"btn btn-default btn-xs\"><i class='fa fa-edit'></button></td>";
-        $out .= "<td>{$m['name']}</td>";
+        $out .= "<td><a href='/admin/members/show/{$m['id']}'>{$m['name']}</a></td>";
         $out .= "<td><a href='mailto:{$m['email']}'>{$m['email']}</a></td>";
         $out .= "<td>{$m['address']}</td>";
         $out .= "<td><a href='tel:+61-8-{$m['telephone']}'>{$m['telephone']}</a></td>";
@@ -91,17 +91,36 @@ class Members extends MY_Admin {
             $this->data['member_table'] .= $this->user_row($m, $this->data['year_date']);
         }
         
-        $this->data['main_content'] .= $this->load->view('admin/list_members',$this->data,true);
+        $this->data['main_content'] .= $this->load->view('admin/members/list_members',$this->data,true);
         $this->load->view('default',$this->data);
 	}
     public function registrations() {
         $this->data['members'] = $this->db->join('registrations', 'registrations.member_id = members.id', 'left outer')->order_by('registrations.year', 'DESC')->get('members')->result_array();
-        $this->data['main_content'] .= $this->load->view('admin/list_registrations',$this->data,true);
+        $this->data['main_content'] .= $this->load->view('admin/members/list_registrations',$this->data,true);
         $this->load->view('default',$this->data);
     }
-/*    public function attendance() {
-   
-    }*/
+    /**
+     * show a user, their registration and attendance history
+     */
+    public function show($uid) {
+        $this->data['user'] = $this->db->get_where('members', ['id'=>$uid])->row_array();
+        $this->data['registrations'] = $this->db->get_where('registrations', ['member_id'=>$uid])->result_array();
+        $this->data['attendance'] = $this->db->order_by('date','DESC')->get_where('attendance', ['member_id'=>$uid])->result_array();
+        $this->data['main_content'] .= $this->load->view('admin/members/show_member', $this->data, true);
+        $this->load->view('default', $this->data);
+    } 
+    /**
+     * Show a list of users and let 
+    **/
+    public function attendance() {
+        $this->data['members'] = $this->db->where(['registrations.year'=>date('Y')])->join('registrations', 'registrations.member_id = members.id', 'left outer')->order_by('registrations.year', 'DESC')->get('members')->result_array();
+        
+        $this->data['today'] = date('Y-m-d');
+        // gotta check who is already attending
+        $this->data['attending'] = array_column($this->db->where(['attendance.date'=>$this->data['today']])->get('attendance')->result_array(), 'member_id'); // members already here today
+        $this->data['main_content'] .= $this->load->view('admin/members/list_attendance',$this->data,true);
+        $this->load->view('default',$this->data);   
+    }
     // api functions
     public function update($mid) {
         if($this->form_validation->run()) {
@@ -163,6 +182,7 @@ class Members extends MY_Admin {
         return $this->output->set_content_type('application/json')
                                 ->set_output(json_encode(['status'=>$msg]));
     }
+
     public function update_registration() {
         // post variable is mid = ['2014-club','2015-state']
    //     echo var_dump($this->input->post());

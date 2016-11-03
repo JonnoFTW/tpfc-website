@@ -141,7 +141,7 @@ class MY_Admin extends MY_Controller {
             $rows = $this->db->get_where('articles', 'editable = 1')->result_array();
             $row_labels = [];
             foreach($rows as $v) {
-                $row_labels[] = $this->_titleAnchor($v['title']);
+                $row_labels[] = $this->_titleAnchor($v['title'], '/admin/article/edit/');
             }
             $articles = ul($row_labels);
             $this->data['article_list'] = $articles;//'<ul>'.$this->_get_articles('admin/article/edit/', false,false).'</ul>';

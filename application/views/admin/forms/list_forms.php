@@ -1,4 +1,5 @@
-<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js"></script>
+
+
 <script type="text/javascript">
 $(document).ready( function() { 
     // When update form is submitted
@@ -38,58 +39,66 @@ $(document).ready( function() {
 });
 </script>
 
-<div class="col-md-12">
-<a id="list"></a>
-    <div class="box">
-		<?
-            echo heading("Available forms are: ",2);
-        ?>
-        <div  class="block">
-        Make your changes to as many files as you wish, then click 'submit'. Note, the "Name" field will be the name of the file when it is downloaded.
-        
-        <?
-            echo '<form id="form_list">';
-            echo form_fieldset("Edit Forms");
-            echo $forms;
-            echo form_submit('Submit','Submit');
-            echo '<div id="list_report"></div>';
-            echo form_fieldset_close();
-            echo form_close();
-        ?>
+
+
+<div class="col-md-9">
+    <div class="panel panel-default">
+        <div class="panel panel-heading">				
+            Club Registrations 
         </div>
-		<?
-            echo heading("Add a new form: ",2);
-        ?>
-        <div class="block">
-        If you do not specify a name, the name of the uploaded file will be used instead.
-        <?
-            echo form_open_multipart('admin/forms/add');
-            echo form_fieldset("New form");
-            echo "<p>";
-            echo form_label("Name","name");
-            echo form_input("name");
-            echo "</p>";
-            
-            echo "<p>";
-            echo form_label("Description","description");
-            echo form_input("description");
-            echo "</p>";
-            
-            echo "<p>";
-            echo form_label("Type","type");
-            echo form_dropdown('type',array("res"=>"Resource","comp"=>"Competion Resources"));
-            echo "</p>";
-            
-            echo "<p>";
-            echo form_label("File","userfile");
-            echo form_upload('userfile');
-            echo "</p>";
-            
-            echo form_submit('Submit','Submit');
-            echo form_fieldset_close();
-            echo form_close();
-        ?>
-        
-        </div>        
+
+        <div class="panel panel-body">
+        <a id="list"></a>
+                <?
+                    echo heading("Available forms are: ",2);
+                ?>
+                <div  class="block">
+                Make your changes to as many files as you wish, then click 'submit'. Note, the "Name" field will be the name of the file when it is downloaded.
+                
+                <?
+                    echo '<form id="form_list">';
+                    echo form_fieldset("Edit Forms");
+                    echo $forms;
+                    echo form_submit('Submit','Submit');
+                    echo '<div id="list_report"></div>';
+                    echo form_fieldset_close();
+                    echo form_close();
+                ?>
+                </div>
+                <?
+                    echo heading("Add a new form: ",2);
+                ?>
+                <div class="block">
+                If you do not specify a name, the name of the uploaded file will be used instead.
+                <?
+                    echo form_open_multipart('admin/forms/add');
+                    echo form_fieldset("New form");
+                    echo "<p>";
+                    echo form_label("Name","name");
+                    echo form_input("name");
+                    echo "</p>";
+                    
+                    echo "<p>";
+                    echo form_label("Description","description");
+                    echo form_input("description");
+                    echo "</p>";
+                    
+                    echo "<p>";
+                    echo form_label("Type","type");
+                    echo form_dropdown('type',array("res"=>"Resource","comp"=>"Competion Resources"));
+                    echo "</p>";
+                    
+                    echo "<p>";
+                    echo form_label("File","userfile");
+                    echo form_upload('userfile');
+                    echo "</p>";
+                    
+                    echo form_submit('Submit','Submit');
+                    echo form_fieldset_close();
+                    echo form_close();
+                ?>
+                       
+                </div>
+        </div>
     </div>
 </div>

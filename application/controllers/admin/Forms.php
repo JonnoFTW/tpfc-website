@@ -17,8 +17,15 @@ class Forms extends MY_Admin {
         // Have fields to update their info
         $result = $this->db->get('forms');
         foreach($result->result_array() as $v) {
-            $this->table->add_row(array(anchor('download/get/'.$v['fid'],$v['name'],array('name'=>$v['fid'])),form_input('name',$v['name']),form_input('description',$v['description']),form_dropdown('type',$this->types,$v['type']),form_checkbox('delete','delete',false)));
+            $this->table->add_row(array(
+                anchor('download/get/'.$v['fid'],$v['name'],array('name'=>$v['fid'])),
+                form_input('name',$v['name'], ['class'=>'form-control']),
+                form_input('description',$v['description'], ['class'=>'form-control']),
+                form_dropdown('type',$this->types,$v['type'], ['class'=>'form-control']),
+                form_checkbox('delete','delete',false, ['class'=>'form-check-input']))
+            );
         }   
+        $this->table->set_template(['table_open'=>'<table class="table">']);
         $this->table->set_heading('Link',"Name","Description","Type","Delete?");
         $this->data['forms'] = $this->table->generate();
         $this->data['main_content'] .= $this->load->view('admin/forms/list_forms',$this->data,true);

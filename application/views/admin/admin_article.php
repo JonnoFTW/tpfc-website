@@ -10,7 +10,7 @@ bkLib.onDomLoaded(function() {
 </script>
 */
 ?>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.min.js"></script> 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.min.js"></script> 
 <script type="text/javascript">
 $(document).ready(function() {
     $('#edit').summernote({
@@ -18,8 +18,10 @@ $(document).ready(function() {
             ['style', ['bold', 'italic', 'underline', 'clear']],
             ['font', ['strikethrough', 'superscript', 'subscript']],
             ['para',[ 'ul', 'ol', 'paragraph']],
+            ['link', ['linkDialogShow', 'unlink', 'video', 'picture', 'hr']],
             ['misc', ['fullscreen', 'codeview', 'undo', 'redo', 'help']]
         ],
+
         callbacks: {
             onChange: function(content, editable) {
                 console.log('changed');
