@@ -22,10 +22,16 @@ Club Registrations <button class="btn btn-primary btn-sm" id="save">Save</button
 $years_registered = [];
 foreach($members as $m) {
     $years_registered[$m['member_id']]['years'][] = ['level'=>$m['level'],'year'=>$m['year']];
+    $years_registered[$m['member_id']]['member_id'] = $m['member_id'];
     $years_registered[$m['member_id']]['name'] = $m['name'];
 }
+usort($years_registered, function($a, $b){return strcmp($a['name'],$b['name']);});
+/*echo "<pre>";
+//var_dump($members);
+var_dump($years_registered);
+echo "</pre>";*/
 foreach($years_registered as $k=>$m) {
-    echo "<tr data-id='{$k}'><td class='col-md-2'>{$m['name']}</td><td class='col-md-10'><select multiple class='select2' style='width:100%' name='member-{$k}'>";
+    echo "<tr data-id='{$m['member_id']}'><td class='col-md-2'><a href='/admin/members/show/{$m['member_id']}'>{$m['name']}</a></td><td class='col-md-10'><select multiple class='select2' style='width:100%' name='member-{$k}'>";
     foreach($m['years'] as $y) 
          echo "<option selected='selected'>{$y['year']}-{$y['level']}</option>\n";
     
@@ -68,7 +74,7 @@ $('button#save').click(function() {
         users[$(this).attr('name').split('-')[1]] = $(this).val();
     });
     $.post('/admin/members/update_registration', users, function() {
-        alert('done');
+        console.log('Updated reigstrations');
     });
 });
 $(document).ready(function() {

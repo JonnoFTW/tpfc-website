@@ -28,9 +28,9 @@ foreach($members as $m) {
             $cake = '<i class="fa fa-birthday-cake" aria-hidden="true"></i>';
    
     }
-    echo "<td>$dt <a href='/admin/members/show/{$m['id']}'>{$m['name']}</a> {$cake}</td><td>";
+    echo "<td class='col-md-5'>$dt <a href='/admin/members/show/{$m['id']}'>{$m['name']}</a> {$cake}</td><td class='col-md-7'>";
     $present = in_array($m['id'], $attending);
-    echo "<button type='button' class='btn btn-default btn-lg attended' id='{$m['id']}' ".($present?'disabled':'')."><i class='fa fa-user-plus' aria-hidden='true'></i> ".($present?'Present':'')."</button>";
+    echo "<button type='button' class='btn btn-default btn-lg attended' id='{$m['id']}' ><i id='icon-{$m['id']}' class='fa ".($present?'fa-user-times':'fa-user-plus')."' aria-hidden='true'></i> <span id='text-{$m['id']}'>".($present?'Present':'')."</span></button>";
     
     echo "</td></tr>";
 }
@@ -42,14 +42,20 @@ foreach($members as $m) {
 $('.attended').click(function() {
     var uid = $(this).attr('id');
     var $btn = $(this);
-    $.post('/admin/members/set_attended/'+uid+'/<? echo $today ?>', function(data) {
+    var $btnText = $('span#text-'+uid);
+    var icon = $('i#icon-'+uid);
+    var url = $btn.text() != ' Present' ? '/admin/members/set_attended/'  : '/admin/members/unset_attended/';
+    $.post(url+uid+'/<? echo $today ?>', function(data) {
         console.log(data);
         if(data.status == "User attended") {
-            $btn.prop('disabled', true);
-            
-            $btn.append(' Present');
-        } else {
+            $btnText.text('Present');
+            icon.removeClass('fa-user-plus');
+            icon.addClass('fa-user-times');
+        } else if (data.status == "Removed") {
             // Error!
+            $btnText.text('');
+            icon.removeClass('fa-user-times');
+            icon.addClass('fa-user-plus');
         }
     });
 });

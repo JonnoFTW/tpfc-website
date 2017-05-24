@@ -16,7 +16,7 @@ class Members extends MY_Admin {
 		$this->form_validation->set_rules('handedness','Handedness', 'in_list[R,L]');
 		$this->form_validation->set_rules('telephone','Telephone', 'regex_match[/^[\d ]+$/]');
 		$this->form_validation->set_rules('mobile','Mobile', 'regex_match[/^[\d ]+$/]');
-        $this->data['member_types'] = ['club', 'state'];
+        $this->data['member_types'] = ['volunteer', 'club', 'fsa-registered', 'fsa-license'];
         $this->data['msg'] = '';
         $this->form_validation->set_rules('date','dob',function($dob) {
             if(date_create_format("Y-m-d",$dob)) {
@@ -95,7 +95,7 @@ class Members extends MY_Admin {
         $this->load->view('default',$this->data);
 	}
     public function registrations() {
-        $this->data['members'] = $this->db->join('registrations', 'registrations.member_id = members.id', 'left outer')->order_by('registrations.year', 'DESC')->get('members')->result_array();
+        $this->data['members'] = $this->db->join('registrations', 'registrations.member_id = members.id', 'left outer')->order_by('member_id', 'ASC')->get('members')->result_array();
         $this->data['main_content'] .= $this->load->view('admin/members/list_registrations',$this->data,true);
         $this->load->view('default',$this->data);
     }
@@ -104,7 +104,7 @@ class Members extends MY_Admin {
      */
     public function show($uid) {
         $this->data['user'] = $this->db->get_where('members', ['id'=>$uid])->row_array();
-        $this->data['registrations'] = $this->db->get_where('registrations', ['member_id'=>$uid])->result_array();
+        $this->data['registrations'] = $this->db->order_by('year', 'DESC')->get_where('registrations', ['member_id'=>$uid])->result_array();
         $this->data['attendance'] = $this->db->order_by('date','DESC')->get_where('attendance', ['member_id'=>$uid])->result_array();
         $this->data['main_content'] .= $this->load->view('admin/members/show_member', $this->data, true);
         $this->load->view('default', $this->data);
@@ -182,6 +182,19 @@ class Members extends MY_Admin {
         return $this->output->set_content_type('application/json')
                                 ->set_output(json_encode(['status'=>$msg]));
     }
+    public function unset_attended($member_id, $date) {
+     // date should be a string matching YYYY-MM-DD
+        $d = DateTime::createFromFormat('Y-m-d', $date);
+        $good = $d && $d->format('Y-m-d') === $date;
+        if(!$good) {
+            $msg = 'Invalid date';
+        } else {
+            $this->db->delete('attendance',['member_id'=>$member_id, 'date'=>$date]);
+            $msg = 'Removed';
+        }
+        return $this->output->set_content_type('application/json')
+                                ->set_output(json_encode(['status'=>$msg]));
+    }
 
     public function update_registration() {
         // post variable is mid = ['2014-club','2015-state']
@@ -207,7 +220,9 @@ class Members extends MY_Admin {
                     $errors[$uid][] = "Invalid level";
                     continue;
                 }
-                $this->db->insert('registrations', ['member_id'=>$uid, 'level'=> $level, 'year'=>$year]);
+                $toins = ['member_id'=>$uid, 'level'=> $level, 'year'=>$year];
+                $errors[$uid][] = $toins;
+                $this->db->insert('registrations', $toins);
             }
         }
         return $this->output->set_content_type('application/json')
