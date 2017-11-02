@@ -23,6 +23,10 @@ class Contact extends MY_Controller {
         $this->form_validation->set_rules('message', 'message', 'required');
         $this->form_validation->set_rules('name', 'name', 'required');
         if($this->form_validation->run()) {
+
+            $config = [
+                'protocol'=> 'smtp',
+            ];
             $this->email->from($this->input->post('email'),$this->input->post('name'));
             $this->email->message($this->input->post('message'));
             $this->email->subject('TPFC Enquiry');
@@ -37,6 +41,9 @@ class Contact extends MY_Controller {
             }
             if($this->session->userdata('logged')){
                    $msg .= "<pre>".$this->email->print_debugger() ."</pre>";
+            } elseif(!$success) {
+                header('Location: mailto:trottparkfc@hotmail.com?subject=TPFC%20Enquiry&body='.urlencode($this->input->post('message')));
+                exit;
             }
             $this->data['msg'] = $msg;
             $name = $this->input->post('name');

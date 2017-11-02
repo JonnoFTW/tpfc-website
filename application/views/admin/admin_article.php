@@ -15,7 +15,8 @@ bkLib.onDomLoaded(function() {
 $(document).ready(function() {
     $('#edit').summernote({
         toolbar: [
-            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['style', ['style']],
+            ['text', ['bold', 'italic', 'underline', 'clear']],
             ['font', ['strikethrough', 'superscript', 'subscript']],
             ['para',[ 'ul', 'ol', 'paragraph']],
             ['link', ['linkDialogShow', 'unlink', 'video', 'picture', 'hr']],

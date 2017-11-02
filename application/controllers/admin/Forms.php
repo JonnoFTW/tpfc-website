@@ -94,7 +94,7 @@ class Forms extends MY_Admin {
         // check the file upload helper
         // store in assets
         
-        $config['upload_path'] = 'assets/documents/';
+        $config['upload_path'] = '/home/jonno/tpfc/public_html/assets/documents/';
 		$config['allowed_types'] = 'doc|docx|pdf';
         $config['encrypt_name'] = true;
         

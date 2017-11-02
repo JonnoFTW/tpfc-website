@@ -10,7 +10,7 @@ Trott Park Fencing Club</h1>
     echo "<script type='text/javascript' src='". base_url()."assets/carousel/lib/$v'></script>\n";
     }*/
     ?>
-      <div class='col-md-12'>
+      <div class='col-md-12' id="carousel-container">
       <?  # insert some images from the db'
     /* foreach($banner_images as $v) {
     echo anchor("gallery/view/{$v['gid']}/{$v['iid']}",img("assets/images/thumbs/{$v['link']}"))."\n";
@@ -34,9 +34,6 @@ Trott Park Fencing Club</h1>
     <a class="btn btn-default btn-circle left carousel-control" href="#myCarousel" data-slide="prev"><i class="fa fa-arrow-left"></i></a>
    <a class="btn btn-default btn-circle right carousel-control" href="#myCarousel" data-slide="next"><i class="fa fa-arrow-right"></i></a>
     </div>
-    <script type="text/javascript">
-    window.initCarousel();
-    </script>
       </div>
     </div>
 
@@ -63,7 +60,7 @@ Trott Park Fencing Club</h1>
                 <div class="service-box">
                 <i class="fa fa-5x fa-dollar wow bounceIn text-primary-inverse" data-wow-delay=".7s" style="visibility: visible; animation-delay: 0.2s; animation-name: bounceIn;"></i>
                 <h3>Cost</h3>
-                <p class="text-muted">Just $5</p>
+                <p class="text-muted">Just $5<br>Save $50 with <a href="http://www.sportsvouchers.sa.gov.au/">Sports Vouchers</a></p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 text-center">
@@ -100,7 +97,7 @@ Trott Park Fencing Club</h1>
 </div>
 
 <div class="home-row parallax-img text-center">
-    <img class="parallax" id="lunge" data-parallax='{"y": 300}' src="http://i.imgur.com/4NSpamc.jpg"> 
+    <img class="parallax" id="lunge" data-parallax='{"y": 100}' src="http://i.imgur.com/4NSpamc.jpg"> 
     <p>Fun for all ages 8 and up</p> 
 </div>
 
@@ -123,8 +120,42 @@ Trott Park Fencing Club</h1>
 <script src="/assets/scripts/jquery.easing.1.3.js"></script>
 <script src="/assets/scripts/jquery.parallax-scroll.js"></script>
 <script>
+window.setupCarousel = function() {
+    $('#myCarousel').carousel({
+        interval: 5000
+    })
+};
+window.initCarousel = function() {
+    // load 30 latest images from facebook
+    $.getJSON("/page/getFBgallery",function(data){
+        var car = $(".carousel-inner");
+        car.empty();
+        var active = true;
+        _.forEach(_.groupBy(data.slice(0,24), function(elem,idx){return Math.floor(idx/4)}),function(group) {
+            var item = $("<div class='item'><div class='row'>");
+            if(active) {
+                item.addClass('active');
+                active = false;
+            }
+            _.forEach(group, function(val, idx) {
+                var elem = $("<div class='col-md-3'><a><div class='img-responsive thumbnail'></div></a></div>");
+                if (idx) {
+                    elem.addClass('hidden-xs hidden-sm');
+                }
+                elem.find('a').attr("href",val.link).attr("alt",val.name).attr("title",val.name).attr('target', '_blank');
+                elem.find('.img-responsive').css("background","url('"+val.source+"')");
+                item.find('.row').append(elem);
+            });
+            car.append(item);
+        });
+        window.setupCarousel();
+    }).fail(function(xhr) {
+        $('#carousel-container').hide();
+    });
+};
 $(document).ready(function() {
     new WOW().init();
+    window.initCarousel();
 });
 var mobileWidth = 1052;
 var data_parallax = {};

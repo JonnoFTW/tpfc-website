@@ -20,48 +20,19 @@ class Facebook {
  
   public function __construct() {
     $this->ci =& get_instance();
+
     $this->permissions = $this->ci->config->item('permissions', 'facebook');
-   
-    // Initialize the SDK
-    FacebookSession::setDefaultApplication(
-         $this->ci->config->item('api_id', 'facebook'),
-         $this->ci->config->item('app_secret', 'facebook')
-    );
-   $this->session = FacebookSession::newAppSession();
-    // Create the login helper and replace REDIRECT_URI with your URL
-    // Use the same domain you set for the apps 'App Domains'
-    // e.g. $helper = new FacebookRedirectLoginHelper( 'http://mydomain.com/redirect' );
-    //$this->helper = new FacebookRedirectLoginHelper( $this->ci->config->item('redirect_url', 'facebook') );
+    $app_id  = $this->ci->config->item('api_id', 'facebook');
+    $app_secret = $this->ci->config->item('app_secret', 'facebook');
+    $this->session = new Facebook\Facebook([
+                                     'app_id'                => $app_id,
+                                     'app_secret'            => $app_secret,
+                                     'default_access_token'  => "{$app_id}|{$app_secret}",
+                                  //   'http_client_handler'   => 'guzzle'
+                                    ]); 
     
- /*
-    if ( $this->ci->session->userdata('fb_token') ) {
-      $this->session = new FacebookSession( $this->ci->session->userdata('fb_token') );
- 
-      // Validate the access_token to make sure it's still valid
-      try {
-        if ( ! $this->session->validate() ) {
-          $this->session = null;
-        }
-      } catch ( Exception $e ) {
-        // Catch any exceptions
-        $this->session = null;
-      }
-    } else {
-      // No session exists
-      try {
-        $this->session = $this->helper->getSessionFromRedirect();
-      } catch( FacebookRequestException $ex ) {
-        // When Facebook returns an error
-      } catch( Exception $ex ) {
-        // When validation fails or other local issues
-      }
-    }
- 
-    if ( $this->session ) {
-      $this->ci->session->set_userdata( 'fb_token', $this->session->getToken() );
- 
-      $this->session = new FacebookSession( $this->session->getToken() );
-    }*/
+
+   
   }
  
   /**
@@ -90,12 +61,26 @@ class Facebook {
     return false;
   }
   public function get_uploaded_photos($page) {
-     $request = new FacebookRequest(
-         $this->session,
+     $request = $this->session->request(
         'GET',
-         "/$page/photos/uploaded"
-   );
-   $response = $request->execute();
-   return  $response->getGraphObject();
+         "/$page/photos/uploaded?fields=source,name,link,picture"
+     );
+   try {  
+       $response = $this->session->getClient()->sendRequest($request);
+   } catch(Facebook\Exceptions\FacebookResponseException $e) {
+      // When Graph returns an error
+      $msg = 'Graph returned an error: ' . $e->getMessage();
+      echo $msg;
+      $this->ci->output->set_status_header(500)->set_content_type('application/text', 'utf-8')->set_output($msg);
+      error_log($msg);
+      return;
+    } catch(Facebook\Exceptions\FacebookSDKException $e) {
+      // When validation fails or other local issues
+      $msg = 'Facebook SDK returned an error: ' . $e->getMessage();
+      $this->ci->output->set_status_header(500)->set_content_type('application/text', 'utf-8')->set_output($msg);
+      error_log($msg);
+      return;
+    }
+   return  $response->getGraphEdge();
   }
 }

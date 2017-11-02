@@ -213,37 +213,6 @@ a.navbar-brand {
 <div id="wrap">
 <div id="fb-root"></div>
 <script>
-window.setupCarousel = function() {
-    $('#myCarousel').carousel({
-    interval: 5000
-    })
-};
-window.initCarousel = function() {
-    // load 30 latest images from facebook
-    $.getJSON("/page/getFBgallery",function(data){
-    var car = $(".carousel-inner");
-    car.empty();
-    var active = true;
-    _.forEach(_.groupBy(data.data.slice(0,24), function(elem,idx){return Math.floor(idx/4)}),function(group) {
-        var item = $("<div class='item'><div class='row'>");
-        if(active) {
-            item.addClass('active');
-            active = false;
-        }
-        _.forEach(group, function(val, idx) {
-            var elem = $("<div class='col-md-3'><a><div class='img-responsive thumbnail'></div></a></div>");
-            if (idx) {
-                elem.addClass('hidden-xs hidden-sm');
-            }
-            elem.find('a').attr("href",val.link).attr("alt",val.name).attr("title",val.name).attr('target', '_blank');
-            elem.find('.img-responsive').css("background","url('"+val.images[4].source+"')");
-            item.find('.row').append(elem);
-        });
-        car.append(item);
-    });
-    window.setupCarousel();
-    });
-};
 (function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;

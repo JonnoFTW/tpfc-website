@@ -15,9 +15,13 @@ class Page extends MY_Controller {
             $this->load->library('facebook');
             $this->output->enable_profiler(FALSE);
             $photos = $this->facebook->get_uploaded_photos('trottparkfencingclub');
-            $this->output
-                 ->set_content_type('application/json')
-                 ->set_output(json_encode($photos->asArray()));
+            //if($photos===null) {
+            //    return;            
+           // } else {
+                $this->output
+                     ->set_content_type('application/json')
+                     ->set_output(json_encode($photos->asArray()));
+       //  }
 	   // phpinfo();
 	}
     public function show($article = false){
