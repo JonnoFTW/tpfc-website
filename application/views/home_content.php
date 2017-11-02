@@ -74,8 +74,8 @@ Trott Park Fencing Club</h1>
     </div>
 </div>
 
-<div class="home-row parallax-img text-center">
-    <img class="parallax" id="sabre" data-parallax='{"y": 300}' src="/assets/images/sabre.jpg"> 
+<div class="home-row parallax-img text-center"  data-pos-x="left" data-bleed="50" data-z-index="0" data-parallax data-src="/assets/images/sabre.jpg">
+  <!--  <img class="parallax" id="sabre" data-parallax='{"y": 300}' src="/assets/images/sabre.jpg"> -->
     <p>All Equipment Provided</p>
 </div>
 
@@ -96,9 +96,9 @@ Trott Park Fencing Club</h1>
     </div>
 </div>
 
-<div class="home-row parallax-img text-center">
-    <img class="parallax" id="lunge" data-parallax='{"y": 100}' src="http://i.imgur.com/4NSpamc.jpg"> 
-    <p>Fun for all ages 8 and up</p> 
+<div class="home-row parallax-img text-center" data-parallax data-pos-x="left" data-bleed="50" data-z-index="0"  data-src="http://i.imgur.com/4NSpamc.jpg">
+   <!-- <img class="parallax" id="lunge" data-parallax='{"y": 100}' src="http://i.imgur.com/4NSpamc.jpg"> -->
+    <p>Fun for ages 8 and up</p> 
 </div>
 
 <div class="home-row" id="group-row">
@@ -117,8 +117,9 @@ Trott Park Fencing Club</h1>
 
 </div>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
-<script src="/assets/scripts/jquery.easing.1.3.js"></script>
-<script src="/assets/scripts/jquery.parallax-scroll.js"></script>
+<!--<script src="/assets/scripts/jquery.easing.1.3.js"></script>
+<script src="/assets/scripts/jquery.parallax-scroll.js"></script>-->
+<script src="https://cdn.rawgit.com/pixelcog/parallax.js/v2.0.0-alpha/dist/jquery.parallax.min.js"></script>
 <script>
 window.setupCarousel = function() {
     $('#myCarousel').carousel({
@@ -157,20 +158,22 @@ $(document).ready(function() {
     new WOW().init();
     window.initCarousel();
 });
+/*
 var mobileWidth = 1052;
 var data_parallax = {};
 var scale = 0.2;
 var resize = function() {
     var width = $(window).width();
-  /*  var img = $('#lunge');
-    console.log('dedoing parallax vals: ', img.width()*scale);
-    img.removeAttr('data-parallax');
-    img.removeAttr('style');
-    img.attr('data-parallax', JSON.stringify({y:img.width()*scale}));*/
+  //  var img = $('#lunge');
+ //   console.log('dedoing parallax vals: ', img.width()*scale);
+ //   img.removeAttr('data-parallax');
+ //   img.removeAttr('style');
+ //   img.attr('data-parallax', JSON.stringify({y:img.width()*scale}));
     $('.parallax').each(function() {
         data_parallax[$(this).attr('id')] = $(this).data('parallax');
     });
 };
+
 var togglep = function() {
   if($(window).width() > mobileWidth ){
     //parallax movement onscroll
@@ -188,7 +191,7 @@ var togglep = function() {
 };
 
 $(window).resize(togglep);
-$(document).ready(togglep);
+$(document).ready(togglep);*/
 
 </script>
 </div> <!-- required to end a div -->
