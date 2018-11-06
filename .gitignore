@@ -7,3 +7,5 @@ application/config/config.php
 */cache/*
 !*/cache/index.html
 !*/cache/.htaccess
+.composer.lock
+
