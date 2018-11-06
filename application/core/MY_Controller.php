@@ -102,7 +102,7 @@ class  MY_Controller  extends  CI_Controller  {
        
         $out .= '</ul><ul class="nav navbar-nav navbar-right">';
         if($this->session->userdata('name')){
-
+            $out .= "<li>".anchor("store", "Store")."<li>\n";
             $out .= "<li>".anchor('admin','Admin')."</li>\n";
             $out .= "<li>".anchor('login/logout','Logout')."</li>\n";
 
@@ -115,6 +115,15 @@ class  MY_Controller  extends  CI_Controller  {
         $out .= "</ul>";
         return $out;
     }
+    public function _group_by($array, $key, $valf, $keyname) {
+        $return = array();
+        foreach($array as $val) {
+            $return[$val[$key]][$val[$keyname]] = $val[$valf];
+        }
+        return $return;
+    }
+
+
 
 } 
 /**

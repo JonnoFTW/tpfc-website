@@ -28,7 +28,7 @@ class Page extends MY_Controller {
         if(!$article) {
             $article = "home";
         }
-	$this->data['article_title'] = $article;
+        $this->data['article_title'] = $article;
         /*if(strcasecmp($article,"home")==0) {
             $result = $this->db->join('images','images.gid = galleries.gid')->order_by("images.iid","random")->limit(30)->get('galleries');
             $this->data['banner_images'] = $result->result_array();
@@ -54,6 +54,6 @@ class Page extends MY_Controller {
             }
             $this->data['title'] = $this->data['article']['title'];
         }
-	$this->load->view('default',$this->data);
+        $this->load->view('default',$this->data);
 	}
 }

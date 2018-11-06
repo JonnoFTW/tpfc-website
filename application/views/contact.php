@@ -49,7 +49,8 @@ foreach($mails as $i){
                   </div>
                   <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                  <button type="submit" value="send" class="btn btn-default">Send</button>
+                  <div class="g-recaptcha" data-sitekey="<? echo config_item('recaptcha')['site_key'];?>" data-callback="recapCallback"></div>
+                  <button type="submit" value="send" class="btn btn-default disabled" id="final-submit">Send</button>
                 </div>
               </div>
 			
@@ -74,4 +75,12 @@ foreach($mails as $i){
 </div>
 
 </div>
-    
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<script type="text/javascript">
+    var recapCallback = function () {
+        $('#final-submit').removeClass('disabled');
+    };
+    $(document).ready(function() {
+        
+    });
+</script>

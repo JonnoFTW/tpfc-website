@@ -7,20 +7,22 @@
     <title>Trott Park Fencing Club :: <? echo str_replace('_',' ',$title); ?> </title>
     <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
     <!-- Latest compiled and minified CSS -->
-       <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"  crossorigin="anonymous">
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"  crossorigin="anonymous">
     <!-- Optional theme -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/css/lavish-bootstrap.css">
     
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Signika:400,300|Cuprum:400,400italic|Sanchez|Pontano+Sans|Kreon:400,700|Cookie|Lato' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Signika:400,300|Cuprum:400,400italic|Sanchez|Pontano+Sans|Kreon:400,700|Cookie|Lato' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
 <link rel="stylesheet" href="/assets/css/footer-distributed-with-address-and-phones.css">
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
-  <!--  <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.3.0/lodash.min.js"></script>-->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.10/lodash.min.js"></script>
+<!---  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css">
@@ -189,6 +191,9 @@ footer {
 a.navbar-brand {
     font-family:Sanchez, serif;
 }
+#main-content {
+    min-height: calc(100vh - 390px - 40px);
+}
 .bot-logo {
 /*   -moz-transform: scaleX(-1);
     -o-transform: scaleX(-1);
@@ -197,6 +202,7 @@ a.navbar-brand {
     filter: FlipH;
     -ms-filter: "FlipH";*/
 }
+tr.clickable-row { cursor: pointer; }
 
 #logo {
 /*    -webkit-box-shadow: 0px 30px 40px -25px rgba(0, 0, 0, 1);
@@ -205,7 +211,8 @@ a.navbar-brand {
 }
 
     </style>
-
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="/assets/css/slick-theme.css"/>
     <meta name="keywords" content="fencing, south australia, adelaide, sport, trott park, sheidow park, excersise, kids, marion, hallett cove"/>
     <meta name="description" content="Trott Park Fencing Club is a small fencing club based in Southern Adelaide with a focus on junior development"/>
   </head>
@@ -231,13 +238,15 @@ Trott Park Fencing Club  <div class="fb-like"
       data-href="https://www.facebook.com/trottparkfencingclub" 
       data-layout="button_count" data-action="like" data-show-faces="true" data-share="false" style="width:79px;"></div>
       </a>
-     </div>
-    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
     <span class="sr-only">Toggle Navigation</span>
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
     </button>
+      
+     </div>
+    
  
      
     <div id="navbar" class="navbar-collapse collapse" aria-expanded="false">
@@ -250,7 +259,7 @@ if (isset($home)) {
     echo $main_content;
 } else {
 ?>
-<div class="container">
+<div class="container" id="main-content">
 
     <div class="row" id="content">
       <? 
@@ -307,13 +316,14 @@ if (isset($home)) {
     <div class="map_canvas" style="width:100%; height: 250px"></div>
     <? echo $this->load->view('training',$this->data,true);?>
 	<div class="footer-company-about">
-    Copyright &copy;<? echo date('Y');?> Trott Park Fencing Club Inc., website built by <a href="http://jonno.9ch.in">Jonathan Mackenzie</a>
+    Copyright &copy;<? echo date('Y');?> Trott Park Fencing Club Inc., website built by <a href="https://jonno.9ch.in">Jonathan Mackenzie</a>
 	</div>
     </div>
 
 </footer>
 
 </div>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.22/gmaps.min.js"></script>
 <? echo $scripts; 
 if($this->session->userdata('logged')) {

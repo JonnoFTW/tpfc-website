@@ -5,39 +5,35 @@
 <?// echo img('assets/images/hedgielogo_small.png');?>
 
 Trott Park Fencing Club</h1>
-      <? 
-       /*foreach(array('jquery.ui.core.min.js','jquery.ui.widget.min.js','jquery.ui.rcarousel.min.js') as $v) {
-    echo "<script type='text/javascript' src='". base_url()."assets/carousel/lib/$v'></script>\n";
-    }*/
-    ?>
+<? /* 
       <div class='col-md-12' id="carousel-container">
-      <?  # insert some images from the db'
-    /* foreach($banner_images as $v) {
-    echo anchor("gallery/view/{$v['gid']}/{$v['iid']}",img("assets/images/thumbs/{$v['link']}"))."\n";
-    }*/?>
-     <div id="myCarousel" class="carousel slide">
-    <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
-    <li data-target="#myCarousel" data-slide-to="3"></li>
-    <li data-target="#myCarousel" data-slide-to="4"></li>
-    <li data-target="#myCarousel" data-slide-to="5"></li>
-    </ol>
-    <!-- Carousel items -->
-    
-    <div class="carousel-inner">
-    <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate vcenter text-center" style="color:#fff;font-size: 40px;margin-top: 50px;"></span>
-    </div>
-       
+          <div id="myCarousel" class="carousel slide" data-ride="carousel">
+             <ol class="carousel-indicators">
+                 <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                 <li data-target="#myCarousel" data-slide-to="1"></li>
+                 <li data-target="#myCarousel" data-slide-to="2"></li>
+                 <li data-target="#myCarousel" data-slide-to="3"></li>
+                 <li data-target="#myCarousel" data-slide-to="4"></li>
+                 <li data-target="#myCarousel" data-slide-to="5"></li>
+             </ol>
+           <div class="carousel-inner" role="listbox">
+             <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate vcenter text-center" style="color:#fff;font-size: 40px;margin-top: 50px;"></span>
+       </div>
       </div><!--/myCarousel-->
-    <a class="btn btn-default btn-circle left carousel-control" href="#myCarousel" data-slide="prev"><i class="fa fa-arrow-left"></i></a>
-   <a class="btn btn-default btn-circle right carousel-control" href="#myCarousel" data-slide="next"><i class="fa fa-arrow-right"></i></a>
+      <a class="btn btn-default btn-circle left carousel-control" href="#myCarousel" data-slide="prev"><i class="fa fa-arrow-left"></i></a>
+      <a class="btn btn-default btn-circle right carousel-control" href="#myCarousel" data-slide="next"><i class="fa fa-arrow-right"></i></a>
     </div>
-      </div>
+*/?>
+    <div id="carousel">
+        
+        <div id="carousel-inner">
+             <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate vcenter text-center" style="color:#fff;font-size: 40px;margin-top: 50px;"></span>
+        </div>
+       
     </div>
-
-
+    
+  </div>
+</div>
 <div class="home-row" id="blue">
     <div class="container">
     <h1 class="text-primary-inverse text-center" >Come and Try!</h1>
@@ -60,7 +56,7 @@ Trott Park Fencing Club</h1>
                 <div class="service-box">
                 <i class="fa fa-5x fa-dollar wow bounceIn text-primary-inverse" data-wow-delay=".7s" style="visibility: visible; animation-delay: 0.2s; animation-name: bounceIn;"></i>
                 <h3>Cost</h3>
-                <p class="text-muted">Just $5<br>Save $50 with <a href="http://www.sportsvouchers.sa.gov.au/">Sports Vouchers</a></p>
+                <p class="text-muted">Just $5<br>Save $50/yr with <a href="https://www.sportsvouchers.sa.gov.au/">Sports Vouchers</a></p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 text-center">
@@ -90,14 +86,14 @@ Trott Park Fencing Club</h1>
             </div>
             <div class="col-sm-6 col-md-6 text-left" style="padding-top:40px;">
                 <p>We're always looking for <? echo anchor('sponsors', 'sponsors');?>, you can make a tax deductable donation through our 
-                <a href="http://asf.org.au/project/fencing-equipment/" target="_blank">Australian Sports Foundation</a> project</p>
+                <a href="https://asf.org.au/project/fencing-equipment/" target="_blank">Australian Sports Foundation</a> project</p>
             </div>
         </div>
     </div>
 </div>
 
-<div class="home-row parallax-img text-center" data-parallax data-pos-x="left" data-bleed="50" data-z-index="0"  data-src="http://i.imgur.com/4NSpamc.jpg">
-   <!-- <img class="parallax" id="lunge" data-parallax='{"y": 100}' src="http://i.imgur.com/4NSpamc.jpg"> -->
+<div class="home-row parallax-img text-center" data-parallax data-pos-x="left" data-bleed="50" data-z-index="0"  data-src="https://i.imgur.com/4NSpamc.jpg">
+   <!-- <img class="parallax" id="lunge" data-parallax='{"y": 100}' src="https://i.imgur.com/4NSpamc.jpg"> -->
     <p>Fun for ages 8 and up</p> 
 </div>
 
@@ -116,38 +112,52 @@ Trott Park Fencing Club</h1>
 </div>
 
 </div>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
-<!--<script src="/assets/scripts/jquery.easing.1.3.js"></script>
-<script src="/assets/scripts/jquery.parallax-scroll.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
 <script src="https://cdn.rawgit.com/pixelcog/parallax.js/v2.0.0-alpha/dist/jquery.parallax.min.js"></script>
 <script>
 window.setupCarousel = function() {
-    $('#myCarousel').carousel({
-        interval: 5000
-    })
+
+    $('#carousel-inner').slick({
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll:4,
+        dots: true,
+        autoplay: true,
+        autoplaySpeed: 4000,
+        responsive: [
+            {
+              breakpoint: 1024,
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                infinite: true,
+                dots: true
+              }
+            },
+            {
+              breakpoint: 740,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+              }
+            },
+        ]
+    });
 };
 window.initCarousel = function() {
     // load 30 latest images from facebook
     $.getJSON("/page/getFBgallery",function(data){
-        var car = $(".carousel-inner");
+        var car = $("#carousel-inner");
         car.empty();
         var active = true;
         _.forEach(_.groupBy(data.slice(0,24), function(elem,idx){return Math.floor(idx/4)}),function(group) {
-            var item = $("<div class='item'><div class='row'>");
-            if(active) {
-                item.addClass('active');
-                active = false;
-            }
             _.forEach(group, function(val, idx) {
                 var elem = $("<div class='col-md-3'><a><div class='img-responsive thumbnail'></div></a></div>");
-                if (idx) {
-                    elem.addClass('hidden-xs hidden-sm');
-                }
-                elem.find('a').attr("href",val.link).attr("alt",val.name).attr("title",val.name).attr('target', '_blank');
-                elem.find('.img-responsive').css("background","url('"+val.source+"')");
-                item.find('.row').append(elem);
+            ///    var elem = $("<div class='col-md-3'><a href='"+val.link+"' alt='"+val.name+"' target='_blank'><img src='"+val.source+"'></div></a></div>");
+               elem.find('a').attr("href",val.link).attr("alt",val.name).attr("title",val.name).attr('target', '_blank');
+              elem.find('.img-responsive').css("background","url('"+val.source+"')");
+                car.append(elem);
             });
-            car.append(item);
         });
         window.setupCarousel();
     }).fail(function(xhr) {
@@ -158,40 +168,5 @@ $(document).ready(function() {
     new WOW().init();
     window.initCarousel();
 });
-/*
-var mobileWidth = 1052;
-var data_parallax = {};
-var scale = 0.2;
-var resize = function() {
-    var width = $(window).width();
-  //  var img = $('#lunge');
- //   console.log('dedoing parallax vals: ', img.width()*scale);
- //   img.removeAttr('data-parallax');
- //   img.removeAttr('style');
- //   img.attr('data-parallax', JSON.stringify({y:img.width()*scale}));
-    $('.parallax').each(function() {
-        data_parallax[$(this).attr('id')] = $(this).data('parallax');
-    });
-};
-
-var togglep = function() {
-  if($(window).width() > mobileWidth ){
-    //parallax movement onscroll
-    $(".parallax").each(function(){
-      $(this).attr("data-parallax",JSON.stringify(data_parallax[$(this).attr('id')]));
-    });
-  } else {
-    $(".parallax").each(function(){
-      //NO MORE PARALLAX MOVEMENT
-      $(this).removeAttr("data-parallax");
-      $(this).removeAttr("style");
-    });
-  }
-   resize();
-};
-
-$(window).resize(togglep);
-$(document).ready(togglep);*/
-
 </script>
-</div> <!-- required to end a div -->
+</div>
