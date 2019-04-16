@@ -100,7 +100,7 @@ Trott Park Fencing Club</h1>
 <div class="home-row" id="group-row">
     <div class="container">
         <div class="row">
-           <div class="col-xs-2 col-xs-offset-5"><img src="/assets/images/three.png" class="wow bounceIn" data-wow-delay="1s"/></div>
+           <div class="col-xs-2 col-xs-offset-5"><img src="/assets/images/three.png" class="wow bounceIn" data-wow-delay="0.5s"/></div>
         </div>
         <h1 class="text-primary-inverse text-center">Group Sessions Available</h1>
         <div class="row">

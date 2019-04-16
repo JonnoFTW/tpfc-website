@@ -11,6 +11,9 @@
             }
              echo ul($groups); 
              ?>
+         <?
+         echo form_open('admin/store/addItem');
+         ?>
          <div class="form-group">
             <h4>New Item</h4>
             <input type="text" placeholder="Item Name" class="form-control">
@@ -18,6 +21,10 @@
             <input type="number" class="form-control" placeholder="Cost">
             <button role=button" class="btn btn-primary">Add</button>
          </div>
+         
+         <?
+         echo form_close();
+         ?>
     </div>
 </div>
 

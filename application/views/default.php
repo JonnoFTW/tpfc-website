@@ -233,10 +233,10 @@ tr.clickable-row { cursor: pointer; }
  <nav class="navbar-inverse navbar-default navbar-static-top" style="margin-bottom:0px;">
       <div class="container">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/">
-Trott Park Fencing Club  <div class="fb-like" 
+      <a class="navbar-brand" href="/" style="min-width:356px"> Trott Park Fencing Club  
+     <div class="fb-like" 
       data-href="https://www.facebook.com/trottparkfencingclub" 
-      data-layout="button_count" data-action="like" data-show-faces="true" data-share="false" style="width:79px;"></div>
+      data-layout="button_count" data-action="like" data-share="false"></div>
       </a>
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
     <span class="sr-only">Toggle Navigation</span>
@@ -316,7 +316,7 @@ if (isset($home)) {
     <div class="map_canvas" style="width:100%; height: 250px"></div>
     <? echo $this->load->view('training',$this->data,true);?>
 	<div class="footer-company-about">
-    Copyright &copy;<? echo date('Y');?> Trott Park Fencing Club Inc., website built by <a href="https://jonno.9ch.in">Jonathan Mackenzie</a>
+    Copyright &copy;<? echo date('Y');?> Trott Park Fencing Club Inc., website built by <a href="https://jonno.top">Jonathan Mackenzie</a>
 	</div>
     </div>
 

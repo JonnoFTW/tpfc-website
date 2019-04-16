@@ -71,6 +71,9 @@ class Store extends MY_Admin {
         $this->load->view('default',$this->data);
         
     }
+    public function addItem() {
+        $data = $this->post();
+    }
     public function orders() {
         // List all the orders
 
